@@ -46,7 +46,7 @@
 						<div class="mb-3">
 							<label for="seller_email">Email</label>
 							<input
-								type="text"
+								type="email"
 								class="form-control"
 								name="seller_email"
 								id="seller_email"
@@ -56,7 +56,7 @@
 						<div class="mb-3">
 							<label for="seller_phone">Phone</label>
 							<input
-								type="text"
+								type="number"
 								class="form-control"
 								name="seller_phone"
 								id="seller_phone"

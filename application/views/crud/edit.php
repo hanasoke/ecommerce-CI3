@@ -17,22 +17,20 @@
 				<div class="col mt-3">
 					<h1>Edit Seller</h1>
 					
-					<?php 
-						// Display flash messages
-						if($this->session->flashdata('success')) : ?>
-						<div class="alert alert-success">
-							<?= $this->session->flashdata('success'); ?>
-						</div>
-					<?php endif; ?>
 
 					<?php 
 						// Display flash messages
-						if($this->session->flashdata('error')) : ?>
-						<div class="alert alert-danger">
-							<?= $this->session->flashdata('error'); ?>
-						</div>
-					<?php endif; ?>
+						if ($this->session->flashdata('success')) {
+							$this->session->flashdata('success');
+						}
 
+						if ($this->session->flashdata('error')) {
+							$this->session->flashdata('error');
+						}
+
+						// Display validation errors
+						echo validation_errors('<div class="alert alert-danger alert-dismissible fade show" role="alert">', '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
+					?>
 					<form method="POST" action="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>">
 						<div class="mb-3">
 							<label for="seller_name">Name</label>
@@ -42,7 +40,7 @@
 								name="seller_name"
 								id="seller_name"
                                 value="<?php echo $seller->seller_name; ?>"
-								required
+					
 							/>
 						</div>
 
@@ -54,7 +52,7 @@
 								name="seller_email"
 								id="seller_email"
                                 value="<?php echo $seller->seller_email; ?>"
-								required
+						
 							/>
 						</div>
 						<div class="mb-3">
@@ -65,7 +63,7 @@
 								name="seller_phone"
 								id="seller_phone"
                                 value="<?php echo $seller->seller_phone; ?>"
-								required
+						
 							/>
                             
 						</div>
@@ -77,18 +75,18 @@
 								name="seller_address"
 								id="seller_address"
                                 value="<?php echo $seller->seller_address; ?>"
-								required
+						
 							/>
 						</div>
 						<div class="mb-3">
 							<label for="seller_picture">Picture URL</label>
 							<input
-								type="file"
+								type="text"
 								class="form-control"
 								id="seller_picture"
 								name="seller_picture"
                                 value="<?php echo $seller->seller_picture; ?>"
-								required
+						
 							/>
 						</div>
 						<button type="submit" class="btn btn-primary float-end">
@@ -102,4 +100,5 @@
 			</div>
 		</div>
 	</body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>

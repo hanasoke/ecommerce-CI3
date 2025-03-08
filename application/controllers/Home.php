@@ -35,7 +35,7 @@ class Home extends CI_Controller {
         // Set validation rules
         $this->form_validation->set_rules('seller_name', 'Name', 'required');
         $this->form_validation->set_rules('seller_email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('seller_phone', 'Phone', 'required|numeric');
+        $this->form_validation->set_rules('seller_phone', 'Phone', 'required|numeric|callback_validate_phone');
         $this->form_validation->set_rules('seller_address', 'Address', 'required');
         $this->form_validation->set_rules('seller_picture', 'Picture', 'required');
 
@@ -60,6 +60,15 @@ class Home extends CI_Controller {
            
             redirect('sellers');
         }
+    }
+
+    // Custom callback function to validate phone numbers
+    public function validate_phone($phone) {
+        if($phone < 0) {
+            $this->form_validation->set_message('validate_phone', 'the {field} must be a positive number.');
+            return FAlSE;
+        }
+        return TRUE;
     }
 
     public function edit($id) 
