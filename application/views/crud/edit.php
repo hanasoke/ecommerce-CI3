@@ -12,11 +12,17 @@
 		/>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container mb-4">
 			<div class="row">
 				<div class="col mt-3">
 					<h1>Edit Seller</h1>
-					
+					<!-- Display file upload errors -->
+					<?php if ($this->session->flashdata('error')) : ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<?= $this->session->flashdata('error'); ?>
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					<?php endif; ?>
 
 					<?php 
 						// Display flash messages
@@ -92,13 +98,6 @@
 								id="seller_picture"
 								name="seller_picture"						
 							/>
-
-							<!-- Display file upload errors -->
-							<?php if ($this->session->flashdata('error')) : ?>
-								<div class="alert alert-danger mt-2">
-									<?= $this->session->flashdata('error'); ?>
-								</div>
-							<?php endif; ?>
 						</div>
 						<button type="submit" class="btn btn-primary float-end">
 							Update

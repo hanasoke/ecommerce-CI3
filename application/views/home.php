@@ -73,9 +73,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($sellers as $seller) : ?>
+							<?php $i = 1; foreach($sellers as $seller) : ?>
 							<tr>
-								<td><?= $seller->id_seller; ?></td>
+								<td><?= $i++; ?></td>
 								<td><?= $seller->seller_name; ?></td>
 								<td><?= $seller->seller_email; ?></td>
 								<td><?= $seller->seller_phone; ?></td>
@@ -89,12 +89,9 @@
 										class="btn btn-warning"
 										>Edit</a
 									>
-									<a
-										href="<?php echo site_url('sellers/delete/' . $seller->id_seller); ?>"
-										class="btn btn-danger"
-										onclick="return confirm('Are you sure?')"
-										>Delete</a
-									>
+								<form action="<?php echo site_url('sellers/delete/' . $seller->id_seller); ?>" method="POST" style="display: inline;" >
+									<button	type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+								</form>
 								</td>
 							</tr>
 							<?php endforeach; ?>

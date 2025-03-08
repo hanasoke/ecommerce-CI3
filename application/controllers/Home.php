@@ -94,41 +94,35 @@ class Home extends CI_Controller {
         $this->form_validation->set_rules('seller_email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('seller_phone', 'Phone', 'required|numeric|callback_validate_phone');
         $this->form_validation->set_rules('seller_address', 'Address', 'required');
+
+        // File upload configuration
+        $config['upload_path'] = FCPATH . 'public/img/sellers';
+        $config['allowed_types'] = 'jpg|jpeg|png'; 
+        $config['max_size'] = 2048; 
+        $config['encrypt_name'] = TRUE;
+
+        // Load the upload library
+        $this->load->library('upload', $config);
         
-        if($this->form_validation->run() == FALSE) {
-            // Validation failed, reload the edit form with errors
+        if($this->form_validation->run() == FALSE || !$this->upload->do_upload('seller_picture')) {
+            // Validation or file upload failed
+            $error = $this->upload->display_errors(); // Get file upload errors
+
+            $this->session->set_flashdata('error', $error); // Set error message
+
+            // Reload the edit form with the current seller data
             $data['seller'] = $this->Seller_model->get_seller($id);
             $this->load->view('crud/edit', $data);
         } else {
-            // File upload configuration
-            $config['upload_path'] = FCPATH . 'public/img/sellers/'; // Path to the public/uploads folders
+            // File upload successfully
+            $upload_data = $this->upload->data();
+            $file_name = $upload_data['file_name']; // Get the uploaded file name
 
-            $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed file types
-            $config['max_size'] = 2048; // Max file size in KB (2MB)
-            $config['encrypt_name'] = TRUE; // Encrpt file name for security
+            // Delete the old image if it exists
+            $old_image = $this->Seller_model->get_seller($id)->seller_picture;
 
-            // Load the upload library with configuration
-            $this->load->library('upload', $config);
-
-            // Check if a file is uploaded
-            if($this->upload->do_upload('seller_picture')) 
-            {
-                $upload_data = $this->upload->data();
-                $file_name = $upload_data['file_name']; // Get the uploaded file name
-
-                // Delete the old image if it exists
-                $old_image = $this->Seller_model->get_seller($id)->seller_picture;
-                if(!empty($old_image) && file_exists(FCPATH . 'public/img/sellers' . $old_image)) {
-                    // Delete the old image
-                    unlink(FCPATH . 'public/img/sellers' . $old_image);
-                }
-            } else {
-                // If no new file is uploaded, keep the old image
-                $file_name = $this->Seller_model->get_seller($id)->seller_picture;
-
-                // If there is a file upload error, set a flashdata message
-                $error = $this->upload->display_errors();
-                $this->session->set_flashdata('error', $error);
+            if(!empty($old_image) && file_exists(FCPATH . 'public/img/sellers' . $old_image)) {
+                unlink(FCPATH . 'public/img/sellers/' . $old_image); // Delete the old image
             }
 
             // Prepare data for upodate
@@ -153,11 +147,24 @@ class Home extends CI_Controller {
 
     public function delete($id)
     {
-        if($this->Seller_model->delete_seller($id)) {
-            $this->session->set_flashdata('success', 'Seller deleted successfully');
+        // Check if the request is a POST request
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Delete the seller
+            if($this->Seller_model->delete_seller($id)) {
+                $this->session->set_flashdata('success', 'Seller deleted successfully');
+            } else {
+                $this->session->set_flashdata('error', 'Failed to delete seller.');
+            }
         } else {
-            $this->session->set_flashdata('error', 'Failed to delete seller.');
+            // If the request is not POST, show an error
+            $this->session->set_flashdata('error', 'Invalid request method.');
         }
+
         redirect('sellers');
+        
+        
+        
+        
+        
     }
 }
