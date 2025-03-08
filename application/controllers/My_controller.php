@@ -12,7 +12,7 @@ class My_controller extends CI_Controller {
 	public function index()
 	{
 		// Data to pass to the view
-		$data['message'] = 'Hello from the controller!';
+		$data['message'] = 'Hanas Bayu Pratama, B.ICT';
 
 		// Load the view and pass data
 		$this->load->view('index', $data);
