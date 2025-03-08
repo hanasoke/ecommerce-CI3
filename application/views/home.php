@@ -64,9 +64,10 @@
 								<td><?= $seller->seller_email; ?></td>
 								<td><?= $seller->seller_phone; ?></td>
 								<td><?= $seller->seller_address; ?></td>
-								<td>
-									<img src="" alt="">
-								</td>
+								<td><?= $seller->seller_picture; ?></td>
+								<!-- <td> -->
+									<!-- <img src="" alt=""> -->
+								<!-- </td> -->
 								<td>
 									<a
 										href="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>"
