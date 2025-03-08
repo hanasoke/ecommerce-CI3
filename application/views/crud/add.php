@@ -17,6 +17,14 @@
 				<div class="col mt-3">
 					<h1>Add Seller</h1>
 
+					<!-- Display file upload errors -->
+					<?php if ($this->session->flashdata('error')) : ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<?= $this->session->flashdata('error'); ?>
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					<?php endif; ?>
+
 					<?php 
 						// Display flash messages
                 		if ($this->session->flashdata('success')) {
@@ -81,12 +89,6 @@
 								id="seller_picture"
 								name="seller_picture"
 							/>
-							<!-- Display file upload errors -->
-							<?php if (isset($error)) : ?>
-								<div class="alert alert-danger mt-2">
-									<?= $error; ?>
-								</div>
-							<?php endif; ?>
 						</div>
 						<button type="submit" class="btn btn-primary float-end">
 							Submit

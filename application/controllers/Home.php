@@ -58,9 +58,6 @@ class Home extends CI_Controller {
             $upload_data = $this->upload->data(); // Get uploaded file data
             $file_name = $upload_data['file_name']; // Get the uploaded file name
 
-            // Debugging: Print the file name
-            echo "Uploaded File Name:" . $file_name;
-
             // Prepare data for insertion
             $data = array(
                 'seller_name' => $this->input->post('seller_name'),
@@ -121,13 +118,17 @@ class Home extends CI_Controller {
 
                 // Delete the old image if it exists
                 $old_image = $this->Seller_model->get_seller($id)->seller_picture;
-                if(!empty($old_image) && file_exists(FCPATH . 'public/uploads/' . $old_image)) {
+                if(!empty($old_image) && file_exists(FCPATH . 'public/img/sellers' . $old_image)) {
                     // Delete the old image
-                    unlink(FCPATH . 'public/uploads/' . $old_image);
+                    unlink(FCPATH . 'public/img/sellers' . $old_image);
                 }
             } else {
                 // If no new file is uploaded, keep the old image
                 $file_name = $this->Seller_model->get_seller($id)->seller_picture;
+
+                // If there is a file upload error, set a flashdata message
+                $error = $this->upload->display_errors();
+                $this->session->set_flashdata('error', $error);
             }
 
             // Prepare data for upodate

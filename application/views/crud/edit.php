@@ -94,9 +94,9 @@
 							/>
 
 							<!-- Display file upload errors -->
-							<?php if (isset($error)) : ?>
+							<?php if ($this->session->flashdata('error')) : ?>
 								<div class="alert alert-danger mt-2">
-									<?= $error; ?>
+									<?= $this->session->flashdata('error'); ?>
 								</div>
 							<?php endif; ?>
 						</div>
