@@ -37,27 +37,46 @@ class Home extends CI_Controller {
         $this->form_validation->set_rules('seller_email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('seller_phone', 'Phone', 'required|numeric|callback_validate_phone');
         $this->form_validation->set_rules('seller_address', 'Address', 'required');
-        $this->form_validation->set_rules('seller_picture', 'Picture', 'required');
 
-        if($this->form_validation->run() ==  FALSE) {
-            // validation failed, reload the add form woth errors
-            $this->load->view('crud/add');
+        // File upload configuration
+        $config['upload_path'] = FCPATH . 'public/img/sellers/'; // Folder to save uploaded filed
+        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed file types
+        $config['max_size'] = 2048; // Max file size in KB (2MB)
+        $config['encrypt_name'] = TRUE; // Encrypt file name for security
+        
+        // Load the upload library with configuration
+        $this->load->library('upload', $config);
+
+        // Check if the form validation and file upload are successful
+        if($this->form_validation->run() ==  FALSE || !$this->upload->do_upload('seller_picture')) {
+            // validation or file upload failed
+            $error = $this->upload->display_errors(); // Get file upload errors
+            $this->session->set_flashdata('error', $error); // Set error message
+            $this->load->view('crud/add'); // Reload the add form
         } else {
-            // Validation passed, insert data
+            // Validation and file upload failed
+            $upload_data = $this->upload->data(); // Get uploaded file data
+            $file_name = $upload_data['file_name']; // Get the uploaded file name
+
+            // Debugging: Print the file name
+            echo "Uploaded File Name:" . $file_name;
+
+            // Prepare data for insertion
             $data = array(
                 'seller_name' => $this->input->post('seller_name'),
                 'seller_email' => $this->input->post('seller_email'),
                 'seller_phone' => $this->input->post('seller_phone'),
                 'seller_address' => $this->input->post("seller_address"),
-                'seller_picture' => $this->input->post('seller_picture')
+                'seller_picture' => $file_name // Save the file name in the database
             );
 
+            // Insert data into the database
             if($this->Seller_model->add_seller($data)) {
                 $this->session->set_flashdata('success', 'Seller added successfully!');
             } else {
                 $this->session->set_flashdata('error', 'Failed to add seller.');
             }
-           
+
             redirect('sellers');
         }
     }
@@ -76,24 +95,51 @@ class Home extends CI_Controller {
         // Set validation rules
         $this->form_validation->set_rules('seller_name', 'Name', 'required');
         $this->form_validation->set_rules('seller_email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('seller_phone', 'Phone', 'required|numeric');
+        $this->form_validation->set_rules('seller_phone', 'Phone', 'required|numeric|callback_validate_phone');
         $this->form_validation->set_rules('seller_address', 'Address', 'required');
-        $this->form_validation->set_rules('seller_picture', 'Picture', 'required');
         
         if($this->form_validation->run() == FALSE) {
             // Validation failed, reload the edit form with errors
             $data['seller'] = $this->Seller_model->get_seller($id);
             $this->load->view('crud/edit', $data);
         } else {
-            // Validation passed, update data
+            // File upload configuration
+            $config['upload_path'] = FCPATH . 'public/img/sellers/'; // Path to the public/uploads folders
+
+            $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed file types
+            $config['max_size'] = 2048; // Max file size in KB (2MB)
+            $config['encrypt_name'] = TRUE; // Encrpt file name for security
+
+            // Load the upload library with configuration
+            $this->load->library('upload', $config);
+
+            // Check if a file is uploaded
+            if($this->upload->do_upload('seller_picture')) 
+            {
+                $upload_data = $this->upload->data();
+                $file_name = $upload_data['file_name']; // Get the uploaded file name
+
+                // Delete the old image if it exists
+                $old_image = $this->Seller_model->get_seller($id)->seller_picture;
+                if(!empty($old_image) && file_exists(FCPATH . 'public/uploads/' . $old_image)) {
+                    // Delete the old image
+                    unlink(FCPATH . 'public/uploads/' . $old_image);
+                }
+            } else {
+                // If no new file is uploaded, keep the old image
+                $file_name = $this->Seller_model->get_seller($id)->seller_picture;
+            }
+
+            // Prepare data for upodate
             $data = array(
                 'seller_name' => $this->input->post('seller_name'),
                 'seller_email' => $this->input->post('seller_email'),
                 'seller_phone' => $this->input->post('seller_phone'),
                 'seller_address' => $this->input->post('seller_address'),
-                'seller_picture' => $this->input->post('seller_picture')
+                'seller_picture' => $file_name // Save the new or existing file name
             );
 
+            // Update data in the database
             if($this->Seller_model->update_seller($id, $data)) {
                 $this->session->set_flashdata('success', 'Seller updated successfully!');
             } else {

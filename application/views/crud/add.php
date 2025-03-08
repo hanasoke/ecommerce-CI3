@@ -32,7 +32,7 @@
 					?>
 
 
-					<form method="POST" action="<?php echo site_url('sellers/add'); ?>">
+					<form method="POST" action="<?php echo site_url('sellers/add'); ?>" enctype="multipart/form-data" >
 						<div class="mb-3">
 							<label for="seller_name">Name</label>
 							<input
@@ -74,13 +74,19 @@
 							/>
 						</div>
 						<div class="mb-3">
-							<label for="seller_picture">Picture Link</label>
+							<label for="seller_picture">My Picture</label>
 							<input
-								type="text"
+								type="file"
 								class="form-control"
 								id="seller_picture"
 								name="seller_picture"
 							/>
+							<!-- Display file upload errors -->
+							<?php if (isset($error)) : ?>
+								<div class="alert alert-danger mt-2">
+									<?= $error; ?>
+								</div>
+							<?php endif; ?>
 						</div>
 						<button type="submit" class="btn btn-primary float-end">
 							Submit

@@ -43,6 +43,22 @@
 				</div>
 			</div>
 			<div class="row">
+				<!-- Display flash message -->
+				<?php if($this->session->flashdata('success')) : ?>
+				<div class="alert alert-success alert-dismissible fade show" role="alert">
+					<?= $this->session->flashdata('success'); ?>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+				<?php endif; ?>
+
+				<?php if($this->session->flashdata('error')) : ?>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<?= $this->session->flashdata('error'); ?>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				<?php endif; ?>
+			</div>
+			<div class="row">
 				<div class="col">
 					<table class="table table-bordered">
 						<thead>
@@ -64,10 +80,9 @@
 								<td><?= $seller->seller_email; ?></td>
 								<td><?= $seller->seller_phone; ?></td>
 								<td><?= $seller->seller_address; ?></td>
-								<td><?= $seller->seller_picture; ?></td>
-								<!-- <td> -->
-									<!-- <img src="" alt=""> -->
-								<!-- </td> -->
+								<td>
+									<img src="<?php echo base_url('public/img/sellers/' . $seller->seller_picture); ?>" alt="Seller Picture" width="100">
+								</td>
 								<td>
 									<a
 										href="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>"

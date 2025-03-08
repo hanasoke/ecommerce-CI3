@@ -31,7 +31,7 @@
 						// Display validation errors
 						echo validation_errors('<div class="alert alert-danger alert-dismissible fade show" role="alert">', '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
 					?>
-					<form method="POST" action="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>">
+					<form method="POST" action="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>" enctype="multipart/form-data">
 						<div class="mb-3">
 							<label for="seller_name">Name</label>
 							<input
@@ -79,15 +79,26 @@
 							/>
 						</div>
 						<div class="mb-3">
-							<label for="seller_picture">Picture URL</label>
+							<label for="seller_picture">Picture</label>
+							<!-- Display the current image -->
+							<?php if(!empty($seller->seller_picture)) : ?>
+								<img src="<?php echo base_url('public/img/sellers/' . $seller->seller_picture); ?>" alt="Current Image" class="img-thumbnail mb-2" width="150">
+							<?php endif; ?>
+
+							<!-- File input for uploading a new image -->
 							<input
-								type="text"
+								type="file"
 								class="form-control"
 								id="seller_picture"
-								name="seller_picture"
-                                value="<?php echo $seller->seller_picture; ?>"
-						
+								name="seller_picture"						
 							/>
+
+							<!-- Display file upload errors -->
+							<?php if (isset($error)) : ?>
+								<div class="alert alert-danger mt-2">
+									<?= $error; ?>
+								</div>
+							<?php endif; ?>
 						</div>
 						<button type="submit" class="btn btn-primary float-end">
 							Update
