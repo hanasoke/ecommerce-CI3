@@ -15,91 +15,68 @@
 		<div class="container">
 			<div class="row">
 				<div class="col mt-3">
-					<h1>Add Seller</h1>
+					<div class="card">
+						<div class="card-body">
+							<h2 class="card-title">Add Seller</h2>
 
-					<!-- Display file upload errors -->
-					<?php if ($this->session->flashdata('error')) : ?>
-						<div class="alert alert-danger alert-dismissible fade show" role="alert">
-							<?= $this->session->flashdata('error'); ?>
-							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-						</div>
-					<?php endif; ?>
+							<!-- Display file upload errors -->
+							<?php if ($this->session->flashdata('error')) : ?>
+								<div class="alert alert-danger alert-dismissible fade show" role="alert">
+									<?= $this->session->flashdata('error'); ?>
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+							<?php endif; ?>
 
-					<?php 
-						// Display flash messages
-                		if ($this->session->flashdata('success')) {
-                    		$this->session->flashdata('success');
-                		}
+							<?php 
+								// Display flash messages
+								if ($this->session->flashdata('success')) {
+									$this->session->flashdata('success');
+								}
 
-                		if ($this->session->flashdata('error')) {
-                    		$this->session->flashdata('error');
-                		}
+								if ($this->session->flashdata('error')) {
+									$this->session->flashdata('error');
+								}
 
-						// Display validation errors
-						echo validation_errors('<div class="alert alert-danger alert-dismissible fade show" role="alert">', '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>')
-					?>
+								// Display validation errors
+								echo validation_errors('<div class="alert alert-danger alert-dismissible fade show" role="alert">', '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>') 
+							?>
 
+							<form method="POST" action="<?php echo site_url('sellers/add'); ?>" enctype="multipart/form-data">
+								<div class="mb-3">
+									<label for="seller_name">Name</label>
+									<input type="text" class="form-control" name="seller_name" id="seller_name" value="<?php echo set_value('seller_name') ?>"/>
+								</div>
 
-					<form method="POST" action="<?php echo site_url('sellers/add'); ?>" enctype="multipart/form-data" >
-						<div class="mb-3">
-							<label for="seller_name">Name</label>
-							<input
-								type="text"
-								class="form-control"
-								name="seller_name"
-								id="seller_name"
-								value="<?php echo set_value('seller_name') ?>"
-							/>
+								<div class="mb-3">
+									<label for="seller_email">Email</label>
+									<input type="email" class="form-control" name="seller_email" id="seller_email" value="<?php echo set_value('seller_email') ?>" />
+								</div>
+
+								<div class="mb-3">
+									<label for="seller_phone">Phone</label>
+									<input type="number" class="form-control" name="seller_phone" id="seller_phone" value="<?php echo set_value('seller_phone') ?>" />
+								</div>
+
+								<div class="mb-3">
+									<label for="seller_address">Address</label>
+									<input type="text" class="form-control" name="seller_address" id="seller_address" value="<?php echo set_value('seller_address') ?>" />
+								</div>
+
+								<div class="mb-3">
+									<label for="seller_picture">My Picture</label>
+									<input type="file" class="form-control" id="seller_picture" name="seller_picture" />
+								</div>
+
+								<button type="submit" class="btn btn-primary float-end">
+									Submit
+								</button>
+								
+								<a href="<?php echo site_url('sellers') ?>" class="btn btn-secondary float-start">
+									Back
+								</a>
+							</form>
 						</div>
-						<div class="mb-3">
-							<label for="seller_email">Email</label>
-							<input
-								type="email"
-								class="form-control"
-								name="seller_email"
-								id="seller_email"
-								value="<?php echo set_value('seller_email') ?>"
-							/>
-						</div>
-						<div class="mb-3">
-							<label for="seller_phone">Phone</label>
-							<input
-								type="number"
-								class="form-control"
-								name="seller_phone"
-								id="seller_phone"
-								value="<?php echo set_value('seller_phone') ?>"
-							/>
-						</div>
-						<div class="mb-3">
-							<label for="seller_address">Address</label>
-							<input
-								type="text"
-								class="form-control"
-								name="seller_address"
-								id="seller_address"
-								value="<?php echo set_value('seller_address') ?>"
-							/>
-						</div>
-						<div class="mb-3">
-							<label for="seller_picture">My Picture</label>
-							<input
-								type="file"
-								class="form-control"
-								id="seller_picture"
-								name="seller_picture"
-							/>
-						</div>
-						<button type="submit" class="btn btn-primary float-end">
-							Submit
-						</button>
-						<a
-							href="<?php echo site_url('sellers') ?>"
-							class="btn btn-secondary float-start"
-						>
-							Back
-						</a>
-					</form>
+					</div>				
 				</div>
 			</div>
 		</div>
