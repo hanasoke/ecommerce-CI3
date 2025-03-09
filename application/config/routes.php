@@ -58,6 +58,10 @@ $route['sellers'] = 'Home';
 $route['sellers/add'] = 'Home/add';
 // Edit a seller
 $route['sellers/edit/(:num)'] = 'Home/edit/$1';
+
+// Detail a seller 
+$route['sellers/detail/(:num)'] = 'Home/detail/$1';
+
 // Delete a seller
 $route['sellers/delete/(:num)'] = 'Home/delete/$1';
 

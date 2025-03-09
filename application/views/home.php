@@ -80,18 +80,21 @@
 								<td><?= $seller->seller_email; ?></td>
 								<td><?= $seller->seller_phone; ?></td>
 								<td><?= $seller->seller_address; ?></td>
+
 								<td>
 									<img src="<?php echo base_url('public/img/sellers/' . $seller->seller_picture); ?>" alt="Seller Picture" width="100">
 								</td>
 								<td>
-									<a
-										href="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>"
-										class="btn btn-warning"
-										>Edit</a
-									>
-								<form action="<?php echo site_url('sellers/delete/' . $seller->id_seller); ?>" method="POST" style="display: inline;" >
-									<button	type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-								</form>
+									<td>
+										<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+ 											<a href="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>" class="btn btn-warning">Edit</a>
+											<a href="<?php echo site_url('sellers/detail/' . $seller->id_seller); ?>" class="btn btn-warning">Detail</a>
+											
+											<form action="<?php echo site_url('sellers/delete/' . $seller->id_seller); ?>" method="POST" style="display: inline;" >
+												<button	type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+											</form>
+										</div>
+									</td>
 								</td>
 							</tr>
 							<?php endforeach; ?>

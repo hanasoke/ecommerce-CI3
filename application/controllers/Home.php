@@ -87,6 +87,12 @@ class Home extends CI_Controller {
         return TRUE;
     }
 
+    public function detail($id) 
+    {
+        $data['seller'] = $this->Seller_model->get_seller($id);
+        $this->load->view('crud/detail', $data);
+    }
+
     public function edit($id) 
     {
         // Set validation rules
