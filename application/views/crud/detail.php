@@ -17,34 +17,46 @@
 				<div class="col mt-3">
 					<div class="card">
 						<div class="card-body">
-							<h1 class="card-title">Edit Seller</h1>
-								<div class="mb-3">
-									<label for="seller_name">Name</label>
-									<input type="text" class="form-control" disabled name="seller_name" id="seller_name" value="<?php echo $seller->seller_name; ?>" />
+							<h1 class="card-title">Seller Profile Detail</h1>
+								<div class="mb-3 row">
+									<label for="seller_name" class="col-sm-2 col-form-label">Name</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control-plaintext" name="seller_name" id="seller_name" value="<?php echo $seller->seller_name; ?>" />
+									</div>
 								</div>
 								
-								<div class="mb-3">
-									<label for="seller_email">Email</label>
-									<input type="text" class="form-control" disabled name="seller_email" id="seller_email" value="<?php echo $seller->seller_email; ?>"/>
+								<div class="mb-3 row">
+									<label for="seller_email" class="col-sm-2 col-form-label" >Email</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control-plaintext" name="seller_email" id="seller_email" value="<?php echo $seller->seller_email; ?>"/>
+									</div>
 								</div>
 
-								<div class="mb-3">
-									<label for="seller_phone">Phone</label>
-									<input type="number" class="form-control" disabled name="seller_phone" id="seller_phone" value="<?php echo $seller->seller_phone; ?>" />
+								<div class="mb-3 row">
+									<label for="seller_phone" class="col-sm-2">Phone</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control-plaintext" disabled name="seller_phone" id="seller_phone" value="<?php echo $seller->seller_phone; ?>" />
+									</div>
 								</div>
 
-								<div class="mb-3">
-									<label for="seller_address">Address</label>
-									<input type="text" class="form-control" disabled name="seller_address" id="seller_address" value="<?php echo $seller->seller_address; ?>" />
+								<div class="mb-3 row">
+									<label for="seller_address" class="col-sm-2">Address</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control-plaintext" name="seller_address" id="seller_address" value="<?php echo $seller->seller_address; ?>" />
+									</div>
 								</div>
 
-								<div class="mb-3">
-									<label for="seller_picture">Picture</label>
+								<div class="mb-3 row">
+									<label for="seller_picture" class="col-sm-2">Picture</label>
 
 									<!-- Display the current image -->
-									<?php if(!empty($seller->seller_picture)) : ?>
-										<img src="<?php echo base_url('public/img/sellers/' . $seller->seller_picture); ?>" alt="Current Image" class="img-thumbnail mb-2" width="150" />
-									<?php endif; ?>
+									<div class="col-sm-10">
+										<?php if(!empty($seller->seller_picture)) : ?>
+											<img src="<?php echo base_url('public/img/sellers/' . $seller->seller_picture); ?>" alt="Current Image" class="img-thumbnail mb-2" width="150" />
+										<?php endif; ?>
+									</div>
+									
+									
 								</div>
 								
 								<a href="<?php echo site_url('sellers') ?>" class="btn btn-secondary float-start">

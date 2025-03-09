@@ -86,7 +86,7 @@
 								</td>
 								<td>
 									<td>
-										<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+										<div class="btn-group" role="group">
  											<a href="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>" class="btn btn-warning">Edit</a>
 											<a href="<?php echo site_url('sellers/detail/' . $seller->id_seller); ?>" class="btn btn-warning">Detail</a>
 											
