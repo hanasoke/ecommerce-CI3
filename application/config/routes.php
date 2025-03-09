@@ -65,5 +65,9 @@ $route['sellers/detail/(:num)'] = 'Home/detail/$1';
 // Delete a seller
 $route['sellers/delete/(:num)'] = 'Home/delete/$1';
 
+// List all cars 
+$route['car'] = 'Car';
+
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
