@@ -30,7 +30,12 @@ class Car extends CI_Controller {
 
     public function add()
     {
-        
+        // Set validation rules
+        $this->form_validation->set_rules('name', 'Name', 'required');
+
+        $this->form_validation->set_rules('');
+
+        $this->load->view('car/add');
     }
 }
 

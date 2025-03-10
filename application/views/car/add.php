@@ -19,7 +19,7 @@
 				<div class="col mt-3">
 					<div class="card">
 						<div class="card-body">
-							<h2 class="card-title">Add Seller</h2>
+							<h2 class="card-title">Add Car</h2>
 
 							<!-- Display file upload errors -->
 							<?php if ($this->session->flashdata('error')) : ?>
