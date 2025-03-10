@@ -44,19 +44,47 @@
 							?>
 
 							<form method="POST" action="<?php echo site_url('sellers/add'); ?>" enctype="multipart/form-data">
-								<div class="mb-3">
-									<label for="seller_name">Name</label>
-									<input type="text" class="form-control" name="seller_name" id="seller_name" value="#"/>
+								<div class="mb-3 row">
+									<label for="name" class="col-sm-2">Name</label>
+									<div class="col-sm-10">
+                                        <input type="text" class="form-control" name="name" id="name" value="#"/>
+                                    </div>
 								</div>
 
-								<div class="mb-3">
-									<label for="seller_email">Email</label>
-									<input type="email" class="form-control" name="seller_email" id="seller_email" value="#" />
+								<div class="mb-3 row">
+									<label for="color" class="col-sm-2 col-form-label">Color</label>
+									<div class="col-sm-10">
+                                        <select class="form-control" name="color" id="color">
+                                            <option selected value="#">Select the Color</option>
+                                            <option value="White">White</option>
+                                            <option value="Black">Black</option>
+                                            <option value="Silver">Silver</option>
+                                            <option value="Bronze">Bronze</option>
+                                            <option value="Blue">Blue</option>
+                                            <option value="Red">Red</option>
+                                        </select>
+                                    </div>
 								</div>
 
-								<div class="mb-3">
-									<label for="seller_phone">Phone</label>
-									<input type="number" class="form-control" name="seller_phone" id="seller_phone" value="#" />
+								<div class="mb-3 row">
+									<label for="brand" class="col-sm-2 col-form-label">Brand</label>
+									<div class="col-sm-10">
+                                        <select class="form-control" name="brand" id="brand" value="#">
+                                            <option selected value="#">Select the Brand</option>
+                                            <option value="BWD">BWD</option>
+                                            
+                                            <option value="Honda">Honda</option>
+                                            <option value="Daihatsu">Daihatsu</option>
+                                            <option value="Mitsubishi">Mitsubishi</option>
+                                            <option value="Tesla">Tesla</option>
+                                            <option value="Chevrolet">Chevrolet</option>
+                                            <option value="Ferrari">Ferrari</option>
+                                            <option value="BMW">BMW</option>
+                                            <option value="Nissan">Nissan</option>
+                                            <option value="Toyota">Toyota</option>
+                                        </select>
+
+                                    </div>
 								</div>
 
 								<div class="mb-3">

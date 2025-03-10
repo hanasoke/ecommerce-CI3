@@ -34,7 +34,7 @@
 				<div class="col">
 					<a
 						class="btn btn-primary mb-3 float-end"
-						href="<?php echo site_url('sellers/add'); ?> "
+						href="<?php echo site_url('car/add'); ?> "
 						>Add Data</a
 					>
 					<a class="btn btn-secondary mb-3" href="<?php echo site_url('sellers'); ?> "
