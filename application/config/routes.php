@@ -68,6 +68,14 @@ $route['sellers/delete/(:num)'] = 'Home/delete/$1';
 // List all cars 
 $route['car'] = 'Car';
 
+// Add a car
+$route['car/add'] = 'Car/add';
+
+// Edit a car
+$route['car/edit/(:num)'] = 'Car/edit/$1';
+
+// Delete a seller
+$route['car/delete/(:num)'] = 'Car/delete/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
