@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>SELLER DATA</title>
+		<title>CAR DATA</title>
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -37,8 +37,8 @@
 						href="<?php echo site_url('sellers/add'); ?> "
 						>Add Data</a
 					>
-					<a class="btn btn-secondary mb-3" href="<?php echo site_url('/'); ?> "
-						>Back to Default</a
+					<a class="btn btn-secondary mb-3" href="<?php echo site_url('sellers'); ?> "
+						>Back to Seller Data</a
 					>
 				</div>
 			</div>
