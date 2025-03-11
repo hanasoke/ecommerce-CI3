@@ -22,7 +22,7 @@
 							<a class="nav-link active text-primary fw-semibold" aria-current="page" href="<?php print site_url('sellers') ?>">Sellers</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-white" href="<?php print site_url('car') ?>">Cars</a>
+							<a class="nav-link text-white" href="<?php print site_url('cars') ?>">Cars</a>
 						</li>
 					</ul>
 				</div>

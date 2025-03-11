@@ -66,7 +66,7 @@ $route['sellers/detail/(:num)'] = 'Home/detail/$1';
 $route['sellers/delete/(:num)'] = 'Home/delete/$1';
 
 // List all cars 
-$route['car'] = 'Car';
+$route['cars'] = 'Car';
 
 // Add a car
 $route['car/add'] = 'Car/add';
