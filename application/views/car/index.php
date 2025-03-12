@@ -121,7 +121,7 @@
 									<a href="<?php echo site_url('car/edit/' . $car->id); ?>" class="btn btn-primary">Edit</a>
 
 									<form action="<?php echo site_url('car/delete/' . $car->id); ?>" method="POST" style="display: inline;">
-										<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?)'">Delete</button>
+										<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
 									</form>
 								</td>
 							</tr>
