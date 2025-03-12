@@ -27,7 +27,7 @@ class Home extends CI_Controller {
 	{
 		// List all sellers
 		$data['sellers'] = $this->Seller_model->get_sellers();
-		$this->load->view('home', $data);
+		$this->load->view('crud/home', $data);
 	}
 
     public function add()

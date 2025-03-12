@@ -25,7 +25,7 @@ class Car extends CI_Controller {
     {
         // list all cars 
         $data['cars'] = $this->Car_model->get_cars();
-        $this->load->view('car/index');
+        $this->load->view('car/index', $data);
     }
 
     public function add()
@@ -67,7 +67,7 @@ class Car extends CI_Controller {
         $this->load->library('upload', $config);
 
         // Check if the form validation and file upload are successful
-        if($this->form_validation->run() == FALSE || !$this->upload->do_upload('seller_picture')) {
+        if($this->form_validation->run() == FALSE || !$this->upload->do_upload('photo')) {
             // validation or file upload failed
 
             $error = $this->upload->display_errors(); // Get file upload errors
@@ -98,7 +98,7 @@ class Car extends CI_Controller {
 
             // Insert data into the database
             if ($this->Car_model->add_car($data)) {
-                $this->session->set_flashdata('success', 'Car adeed successfully!');
+                $this->session->set_flashdata('success', 'Car added successfully!');
             } else {
                 $this->session->set_flashdata('error', 'Failed to add seller.');
             }

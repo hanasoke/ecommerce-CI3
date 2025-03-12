@@ -63,16 +63,61 @@
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th>ID</th>
+								<th class="text-center">No</th>
 								<th>Name</th>
-								<th>Email</th>
-								<th>Phone</th>
-								<th>Address</th>
-								<th>Picture</th>
-								<th>Actions</th>
+								<th>Color</th>
+								<th>Brand</th>
+								<th>Transmission</th>
+								<th>Seat</th>
+								<th>Machine</th>
+								<th>Power</th>
+								<th>Price</th>
+								<th>Stock</th>
+								<th>Manufacture</th>
+								<th>Photo</th>
 							</tr>
 						</thead>
 						<tbody>
+							<?php $i = 1; foreach($cars as $car) : ?>
+							<tr class="text-center">
+								<td>
+									<?= $i++; ?>
+								</td>
+								<td>
+									<?= $car->name; ?> 
+								</td>
+								<td>
+									<?= $car->color; ?>
+								</td>
+								<td>
+									<?= $car->brand; ?>
+								</td>
+								<td>
+									<?= $car->transmission; ?>
+								</td>
+								<td>
+									<?= $car->seat; ?>
+								</td>
+								<td>
+									<?= $car->machine; ?>
+								</td>
+								<td>
+									<?= $car->power; ?>
+								</td>
+								<td>
+									<?= $car->price; ?>
+								</td>
+								<td>
+									<?= $car->stock; ?>
+								</td>
+								<td>
+									<?= $car->manufacture; ?>
+								</td>
+								<td>
+									<img src="<?php print base_url('public/img/cars/' . $car->photo); ?>" alt="Car Picture" width="100" >
+								</td>
+							</tr>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</div>
