@@ -75,6 +75,7 @@
 								<th>Stock</th>
 								<th>Manufacture</th>
 								<th>Photo</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -115,6 +116,13 @@
 								</td>
 								<td>
 									<img src="<?php print base_url('public/img/cars/' . $car->photo); ?>" alt="Car Picture" width="100" >
+								</td>
+								<td>
+									<a href="<?php echo site_url('car/edit/' . $car->id); ?>" class="btn btn-primary">Edit</a>
+
+									<form action="<?php echo site_url('car/delete/' . $car->id); ?>" method="POST" style="display: inline;">
+										<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?)'">Delete</button>
+									</form>
 								</td>
 							</tr>
 							<?php endforeach; ?>

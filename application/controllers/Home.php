@@ -102,7 +102,7 @@ class Home extends CI_Controller {
         $this->form_validation->set_rules('seller_address', 'Address', 'required');
 
         // File upload configuration
-        $config['upload_path'] = FCPATH . 'public/img/sellers';
+        $config['upload_path'] = FCPATH . 'public/img/sellers/';
         $config['allowed_types'] = 'jpg|jpeg|png'; 
         $config['max_size'] = 2048; 
         $config['encrypt_name'] = TRUE;
@@ -110,43 +110,56 @@ class Home extends CI_Controller {
         // Load the upload library
         $this->load->library('upload', $config);
         
-        if($this->form_validation->run() == FALSE || !$this->upload->do_upload('seller_picture')) {
-            // Validation or file upload failed
-            $error = $this->upload->display_errors(); // Get file upload errors
-
-            $this->session->set_flashdata('error', $error); // Set error message
-
-            // Reload the edit form with the current seller data
+        if($this->form_validation->run() == FALSE) {
+            // Validation failed
             $data['seller'] = $this->Seller_model->get_seller($id);
-            $this->load->view('crud/edit', $data);
+            $this->load->view('crud/edit', $data);        
         } else {
-            // File upload successfully
-            $upload_data = $this->upload->data();
-            $file_name = $upload_data['file_name']; // Get the uploaded file name
+            // Check if a file was uploaded
+            if(!empty($_FILES['seller_picture']['name'])) {
+                if(!$this->upload->do_upload('seller_picture')) {
+                    // File upload failed
+                    $error = $this->upload->display_errors();
 
-            // Delete the old image if it exists
-            $old_image = $this->Seller_model->get_seller($id)->seller_picture;
+                    $this->session->set_flashdata('error', $error);
 
-            if(!empty($old_image) && file_exists(FCPATH . 'public/img/sellers' . $old_image)) {
-                unlink(FCPATH . 'public/img/sellers/' . $old_image); // Delete the old image
+                    $data['seller'] = $this->Seller_model->get_seller($id);
+                    $this->load->view('crud/edit', $data);
+                    return;
+                } else {
+                    // File upload successful
+                    $upload_data = $this->upload->data();
+                    $file_name = $upload_data['file_name'];
+
+                    // Delete the old image if it exists
+                    $old_image = $this->Seller_model->get_seller($id)->seller_picture;
+
+                    if(!empty($old_image)) {
+                        unlink(FCPATH . 'public/img/sellers/' . $old_image);
+                    }
+                }
+            } else {
+                // No file uploaded, retain the old image
+                $file_name = $this->Seller_model->get_seller($id)->seller_picture;
             }
 
-            // Prepare data for upodate
+            // Prepare data for update
             $data = array(
                 'seller_name' => $this->input->post('seller_name'),
                 'seller_email' => $this->input->post('seller_email'),
                 'seller_phone' => $this->input->post('seller_phone'),
                 'seller_address' => $this->input->post('seller_address'),
-                'seller_picture' => $file_name // Save the new or existing file name
+                'seller_picture' => $file_name
             );
 
             // Update data in the database
             if($this->Seller_model->update_seller($id, $data)) {
+
                 $this->session->set_flashdata('success', 'Seller updated successfully!');
+            
             } else {
                 $this->session->set_flashdata('error', 'Failed to update seller.');
             }
-
             redirect('sellers');
         }
     }

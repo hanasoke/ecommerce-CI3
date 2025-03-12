@@ -32,14 +32,8 @@
 		<div class="container mt-5">
 			<div class="row">
 				<div class="col">
-					<a
-						class="btn btn-primary mb-3 float-end"
-						href="<?php echo site_url('sellers/add'); ?> "
-						>Add Data</a
-					>
-					<a class="btn btn-secondary mb-3" href="<?php echo site_url('/'); ?> "
-						>Back to Default</a
-					>
+					<a class="btn btn-primary mb-3 float-end" href="<?php echo site_url('sellers/add'); ?>">Add Data</a>
+					<a class="btn btn-secondary mb-3" href="<?php echo site_url('/'); ?> ">Back to Default</a>
 				</div>
 			</div>
 			<div class="row">
@@ -87,7 +81,7 @@
 								<td>
 									<td>
 										<div class="btn-group" role="group">
- 											<a href="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>" class="btn btn-warning">Edit</a>
+ 											<a href="<?php echo site_url('sellers/edit/' . $seller->id_seller); ?>" class="btn btn-primary">Edit</a>
 											<a href="<?php echo site_url('sellers/detail/' . $seller->id_seller); ?>" class="btn btn-warning">Detail</a>
 											
 											<form action="<?php echo site_url('sellers/delete/' . $seller->id_seller); ?>" method="POST" style="display: inline;" >
